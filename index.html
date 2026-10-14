@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Comparison Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="hero-icon">✓</div>
+      <div>
+        <h1>Client Comparison Tool</h1>
+        <p>Smart Excel comparison for client business data</p>
+      </div>
+    </header>
+
+    <section class="card upload-card">
+      <div class="section-title">
+        <span class="step">1</span>
+        <div>
+          <h2>Upload your Excel file</h2>
+          <p>Select the client workbook you want to compare.</p>
+        </div>
+      </div>
+
+      <div id="dropZone" class="drop-zone">
+        <input id="fileInput" type="file" accept=".xlsx,.xls" hidden>
+        <div class="upload-icon">↑</div>
+        <h3>Drag & drop your Excel file here</h3>
+        <p>or</p>
+        <button id="chooseBtn" class="primary">Choose Excel File</button>
+        <small>Supports .xlsx and .xls</small>
+      </div>
+      <div id="fileInfo" class="hidden"></div>
+    </section>
+
+    <section id="sheetSection" class="card hidden">
+      <div class="section-title">
+        <span class="step">2</span>
+        <div>
+          <h2>Review workbook</h2>
+          <p>The last sheet is the reference; earlier sheets compare against sheets to their right.</p>
+        </div>
+      </div>
+      <div id="sheetList"></div>
+      <div id="warnings"></div>
+      <button id="compareBtn" class="primary wide">▶ Start Comparison</button>
+    </section>
+
+    <section id="resultSection" class="card hidden">
+      <div class="section-title">
+        <span class="step success-step">3</span>
+        <div>
+          <h2>Comparison complete</h2>
+          <p>Your result file is ready.</p>
+        </div>
+      </div>
+      <div id="resultSummary"></div>
+      <button id="downloadBtn" class="success wide">↓ Download Comparison Result</button>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <span class="step">4</span>
+        <div>
+          <h2>Built-in Force mapping</h2>
+          <p>The output workbook includes a <strong>Force</strong> sheet for temporary client-by-client mapping. No separate mapping upload is needed.</p>
+        </div>
+      </div>
+      <ol class="mapping-instructions">
+        <li>Download the comparison result and open it in Excel.</li>
+        <li>In the <strong>Force</strong> sheet, paste <strong>Client_Unique_ID</strong> and <strong>PTY_LOCAL_CODE</strong> into columns A and B.</li>
+        <li>Type the exact client worksheet name in cell <strong>D2</strong>, for example <code>286859_Pernod</code>.</li>
+        <li>Excel will calculate <strong>PTY_LOCAL_CODE</strong> only for that selected client sheet, using its <strong>Matched_CL_ID</strong>.</li>
+        <li>To map another client, clear columns A:B, change D2 to the next sheet name, and paste the next mapping.</li>
+      </ol>
+    </section>
+
+    <div class="privacy-note">
+      <strong>🔒 Your file stays in your browser.</strong>
+      The workbook is processed locally and is not uploaded to this website by the comparison tool.
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
